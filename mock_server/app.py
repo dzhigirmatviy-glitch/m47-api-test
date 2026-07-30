@@ -7,6 +7,7 @@ TRANSLATIONS = {
     ("apple", "es-es"): "manzana",
     ("apple", "ru-ru"): "яблоко",
     ("apple", "fr-fr"): "pomme",
+    ("house", "es-es"): "casa",
 }
 
 @app.get("/translate", response_class=PlainTextResponse)
