@@ -1,23 +1,23 @@
 # Translation API Test
 
 ## Overview
-Automated test for a translation API endpoint.
+Automated tests for a translation API endpoint.
 
 **Stack:**
-- Playwright – HTTP requests & assertions
+- Playwright (HTTP requests + assertions)
 - FastAPI – mock server
 - Python + Node.js
 
 ## Project Structure
 
 -m47-api-test/
-   - mock-server/
+   - mock_server/
      - app.py # FastAPI mock server
    - api-test.spec.js # Playwright test
    - playwright.config.js # Playwright config
    - package.json # Node.js dependencies
-   - README.md # This file
-   - playwright-report/ # Test report (generated)
+   - README.md
+   - playwright-report/ # Test report
 
 ## Setup & Run
 
@@ -30,12 +30,16 @@ Automated test for a translation API endpoint.
   pip install fastapi uvicorn
 
 ### 3. Run the mock server
-  Start the mock API locally:
-  uvicorn mock-server.app:app --reload --port 8000
+  npx playwright test
 
-  Test the endpoint manually:
-  http://127.0.0.1:8000/translate?query=apple&locale=es-ES
-  Expected response: manzana
+   The mock server starts automatically before the run (configured via `webServer` in    playwright.config.js) — no need to start it manually.
+
+   (Optional) To check the mock server on its own, e.g. in a browser:
+
+   uvicorn mock_server.app:app --reload --port 8000
+
+   Then open: http://127.0.0.1:8000/translate?query=apple&locale=es-ES
+   Expected response: manzana
 
 ### 4. Run the test
   In a separate terminal, run:
@@ -45,21 +49,18 @@ Automated test for a translation API endpoint.
   After the test run, open the HTML report:
   npx playwright show-report
 
-### Test logic
+### What's tested
 
-  Sends a GET request to /translate
-  Query parameters: query=apple, locale=es-ES
-  Asserts:
-    HTTP status is 200
-
-  Response body equals "manzana"
+  apple → manzana (es-ES), 200
+   house → casa (es-ES), 200
+   unknown word → 404
+   missing locale → 422
+   missing query → 422
 
 ### Notes
-  The original API endpoint used in the task (api.mytranslator.com) is not accessible.
-
-  A local mock server is used instead to simulate the expected behavior.
-
-  The test is designed to be run locally without external dependencies.
+   Real API (mytranslator.com) wasn't accessible, so used a mock server instead.
+   Query/locale are case-insensitive, whitespace is trimmed.
+   Everything runs locally, no external calls.
 
 ### Author
   Matvii Dzhyhyr
