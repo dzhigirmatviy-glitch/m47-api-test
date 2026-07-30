@@ -28,6 +28,10 @@ Automated tests for a translation API endpoint.
    - playwright.config.js # Playwright config
    - package.json # Node.js dependencies
    - README.md
+<<<<<<< HEAD
+=======
+   - playwright-report/ # Test report
+>>>>>>> 9df25e9d55b0e3e24834606e90582f6747f48f11
 
 ## Setup & Run
 
@@ -41,6 +45,10 @@ Automated tests for a translation API endpoint.
   pip install fastapi uvicorn
 
 ### 3. Run the mock server
+<<<<<<< HEAD
+=======
+  npx playwright test
+>>>>>>> 9df25e9d55b0e3e24834606e90582f6747f48f11
 
    The mock server starts automatically before the run (configured via `webServer` in    playwright.config.js) — no need to start it manually.
 
@@ -66,6 +74,14 @@ Automated tests for a translation API endpoint.
    unknown word → 404
    missing locale → 422
    missing query → 422
+<<<<<<< HEAD
+=======
+
+### Notes
+   Real API (mytranslator.com) wasn't accessible, so used a mock server instead.
+   Query/locale are case-insensitive, whitespace is trimmed.
+   Everything runs locally, no external calls.
+>>>>>>> 9df25e9d55b0e3e24834606e90582f6747f48f11
 
 ### Author
   Matvii Dzhyhyr
